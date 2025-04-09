@@ -24,7 +24,6 @@
       display: flex;
       background-color: #f8fafc;
       color: #000;
-      height: 100vh;
       position: relative;
     }
 
@@ -38,7 +37,31 @@
       border-bottom-left-radius: 20px;
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
       will-change: transform;
-      z-index: 100;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: -250px;
+      z-index: 1000;
+      transition: left 0.3s ease;
+    }
+
+    .sidebar.show {
+      left: 0;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    .overlay.show {
+      display: block;
     }
 
     .logo {
@@ -86,8 +109,14 @@
       padding: 25px;
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      width: 100%;
+    }
+
+    .content.sidebar-open {
+      margin-left: 250px;
     }
 
     .top-bar {
@@ -95,6 +124,11 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      background: #f8fafc;
+      z-index: 100;
+      padding: 10px 0;
     }
 
     .hamburger {
@@ -102,11 +136,13 @@
       font-size: 24px;
       cursor: pointer;
       color: #1A1A2E;
+      z-index: 1001;
     }
 
     .top-bar h1 {
       font-size: 24px;
       color: #1A1A2E;
+      flex: 1;
     }
 
     .search-profile {
@@ -659,32 +695,18 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        overflow: auto;
-      }
-
-      .sidebar {
-        position: fixed;
-        left: -300px;
-        top: 0;
-        bottom: 0;
-        transition: left 0.3s ease;
-        z-index: 1000;
-      }
-
-      .sidebar.show {
-        left: 0;
-      }
-
       .hamburger {
         display: block;
       }
 
       .content {
         padding: 15px;
-        height: auto;
         width: 100%;
+        margin-left: 0;
+      }
+
+      .content.sidebar-open {
+        margin-left: 0;
       }
 
       .top-bar {
@@ -765,6 +787,7 @@
   </style>
 </head>
 <body>
+  <div class="overlay" id="overlay"></div>
   <div class="sidebar" id="sidebar">
     <div class="logo">AI CADMEY</div>
     <div class="menu-item active"><i class="fas fa-chart-bar"></i> Dashboard</div>
@@ -773,7 +796,7 @@
     <div class="menu-item"><i class="fas fa-cog"></i> Settings</div>
   </div>
 
-  <div class="content">
+  <div class="content" id="content">
     <div class="top-bar">
       <div class="hamburger" id="hamburger">
         <i class="fas fa-bars"></i>
@@ -1031,10 +1054,26 @@
       // Hamburger menu functionality
       const hamburger = document.getElementById('hamburger');
       const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const content = document.getElementById('content');
       
-      hamburger.addEventListener('click', function() {
+      function toggleSidebar() {
         sidebar.classList.toggle('show');
-      });
+        overlay.classList.toggle('show');
+        
+        // Toggle hamburger icon
+        const icon = hamburger.querySelector('i');
+        if (sidebar.classList.contains('show')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      }
+      
+      hamburger.addEventListener('click', toggleSidebar);
+      overlay.addEventListener('click', toggleSidebar);
 
       // Add new submission modal
       const addBtn = document.getElementById('addBtn');
