@@ -24,27 +24,28 @@
       display: flex;
       background-color: #f8fafc;
       color: #000;
-      padding: 10px; /* Added body padding */
+      padding: 10px;
     }
 
     /* Desktop Sidebar */
     .sidebar {
       width: 250px;
       background-color: #1A1A2E;
-      padding: 30px 20px;
+      padding: 25px 15px;
       display: flex;
       flex-direction: column;
-      border-radius: 20px; /* All corners rounded */
+      border-radius: 20px;
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
       will-change: transform;
-      height: calc(100vh - 20px); /* Account for body padding */
+      height: calc(100vh - 20px);
+      overflow-y: auto;
     }
 
     .logo {
       color: white;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       text-align: center;
       padding: 10px;
       border-radius: 8px;
@@ -52,7 +53,7 @@
 
     .menu-item {
       background-color: #D6F26B;
-      padding: 12px 18px;
+      padding: 12px 15px;
       border-radius: 30px;
       color: black;
       font-weight: bold;
@@ -60,7 +61,7 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-size: 14px;
       will-change: transform;
     }
@@ -82,7 +83,7 @@
 
     .content {
       flex: 1;
-      padding: 25px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -98,27 +99,27 @@
 
     .hamburger {
       display: none;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
       color: #1A1A2E;
     }
 
     .top-bar h1 {
-      font-size: 24px;
+      font-size: 22px;
       color: #1A1A2E;
     }
 
     .search-profile {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
 
     .search-bar {
       padding: 8px 15px;
       background: #fff;
       border-radius: 30px;
-      width: 220px;
+      width: 200px;
       display: flex;
       align-items: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -146,8 +147,8 @@
     }
 
     .profile-pic {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background-color: #1A1A2E;
       display: flex;
@@ -167,7 +168,7 @@
 
     .main-grid {
       display: flex;
-      gap: 20px;
+      gap: 15px;
       height: calc(100% - 60px);
     }
 
@@ -175,14 +176,14 @@
       flex: 2;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
     }
 
     .right-section {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
     }
 
     .submissions, .results {
@@ -193,9 +194,9 @@
     }
 
     .section-header {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       color: #1A1A2E;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .submission-container {
@@ -221,9 +222,10 @@
     .submission-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 5px;
-      padding: 12px;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      padding: 10px;
       border-radius: 8px;
       cursor: pointer;
       will-change: transform;
@@ -238,28 +240,27 @@
       text-align: center;
       font-weight: bold;
       background: #f1f5f9;
-      padding: 6px 10px;
+      padding: 5px 8px;
       border-radius: 8px;
-      font-size: 12px;
-      margin-left: 48px;
-      margin-bottom: 15px;
-      width: fit-content;
+      font-size: 11px;
+      margin-left: 8px;
+      flex-shrink: 0;
     }
 
     .date-item .day {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
       margin-bottom: 2px;
     }
 
     .date-item .month {
-      font-size: 11px;
+      font-size: 10px;
       opacity: 0.8;
     }
 
     .thumbnail {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 4px;
       display: flex;
       align-items: center;
@@ -286,11 +287,11 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .submission-item-content p {
-      font-size: 12px;
+      font-size: 11px;
       color: #64748b;
       white-space: nowrap;
       overflow: hidden;
@@ -313,7 +314,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 8px;
-      padding: 12px;
+      padding: 10px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -332,7 +333,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .result-content p {
@@ -347,7 +348,7 @@
       font-weight: bold;
       margin-left: 8px;
       flex-shrink: 0;
-      font-size: 14px;
+      font-size: 13px;
       will-change: transform;
     }
 
@@ -365,7 +366,7 @@
 
     .chart-box {
       background: #fff;
-      width: 260px;
+      width: 100%;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       padding: 15px;
@@ -378,17 +379,17 @@
     .chart-placeholder h3 {
       margin-bottom: 8px;
       color: #1A1A2E;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .chart-placeholder p {
       color: #64748b;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .chart-visual {
       width: 100%;
-      height: 120px;
+      height: 100px;
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100"><polyline fill="none" stroke="%23D6F26B" stroke-width="3" points="0,80 50,60 100,70 150,50 200,60 250,40 300,50 350,30 400,40 450,20 500,30"/><circle cx="0" cy="80" r="4" fill="%23D6F26B"/><circle cx="50" cy="60" r="4" fill="%23D6F26B"/><circle cx="100" cy="70" r="4" fill="%23D6F26B"/><circle cx="150" cy="50" r="4" fill="%23D6F26B"/><circle cx="200" cy="60" r="4" fill="%23D6F26B"/><circle cx="250" cy="40" r="4" fill="%23D6F26B"/><circle cx="300" cy="50" r="4" fill="%23D6F26B"/><circle cx="350" cy="30" r="4" fill="%23D6F26B"/><circle cx="400" cy="40" r="4" fill="%23D6F26B"/><circle cx="450" cy="20" r="4" fill="%23D6F26B"/><circle cx="500" cy="30" r="4" fill="%23D6F26B"/></svg>') no-repeat center center;
       margin: 10px 0;
       background-size: contain;
@@ -398,7 +399,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: #fff;
       padding: 15px;
       border-radius: 12px;
@@ -406,7 +407,7 @@
     }
 
     .performance {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: bold;
       color: #1A1A2E;
       position: relative;
@@ -414,24 +415,24 @@
 
     .performance::after {
       content: '%';
-      font-size: 16px;
+      font-size: 14px;
       position: absolute;
       top: 5px;
-      right: -15px;
+      right: -12px;
     }
 
     .performance-label {
       color: #64748b;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .add-btn {
       background: #1A1A2E;
       color: white;
       width: 100%;
-      height: 50px;
+      height: 45px;
       border-radius: 12px;
-      font-size: 24px;
+      font-size: 22px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -456,9 +457,9 @@
     .event {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
       border-radius: 8px;
       cursor: pointer;
     }
@@ -470,15 +471,15 @@
     .event-circle {
       background: #FFD493;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
       color: #1A1A2E;
       flex-shrink: 0;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .event-details {
@@ -493,7 +494,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .event-details p {
@@ -521,9 +522,9 @@
 
     .modal-content {
       background: white;
-      padding: 20px;
+      padding: 18px;
       border-radius: 12px;
-      width: 420px;
+      width: 400px;
       max-width: 90%;
       max-height: 90vh;
       overflow-y: auto;
@@ -538,7 +539,7 @@
     }
 
     .modal-title {
-      font-size: 20px;
+      font-size: 18px;
       color: #1A1A2E;
     }
 
@@ -559,7 +560,7 @@
       margin-bottom: 6px;
       font-weight: 600;
       color: #1A1A2E;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .form-group input, 
@@ -569,7 +570,7 @@
       padding: 8px 12px;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .form-group textarea {
@@ -596,7 +597,7 @@
 
     .file-upload p {
       color: #64748b;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .submit-btn {
@@ -607,7 +608,7 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
       width: 100%;
       margin-top: 10px;
     }
@@ -626,29 +627,26 @@
       .results-container {
         flex-direction: column;
       }
-      
-      .chart-box {
-        width: 100%;
-      }
     }
 
     @media (max-width: 768px) {
       body {
         position: relative;
-        padding: 0;
+        padding: 8px;
       }
 
       .sidebar {
         position: fixed;
         left: -250px;
-        top: 10px;
-        bottom: 10px;
+        top: 8px;
+        bottom: 8px;
         z-index: 1000;
         transition: left 0.3s ease;
+        padding: 20px 12px;
       }
 
       .sidebar.show {
-        left: 10px;
+        left: 8px;
       }
 
       .overlay {
@@ -677,8 +675,12 @@
 
       .top-bar {
         flex-direction: row;
-        gap: 15px;
+        gap: 12px;
         align-items: center;
+      }
+
+      .top-bar h1 {
+        font-size: 20px;
       }
 
       .search-profile {
@@ -686,47 +688,42 @@
       }
 
       .search-bar {
-        width: 180px;
+        width: 160px;
       }
 
       .submission-container,
       .results-container {
         height: auto;
-        max-height: 300px;
+        max-height: none;
       }
 
       .results {
         height: auto;
-        max-height: 200px;
+        max-height: none;
       }
 
       /* New mobile layout order */
       .main-grid {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
       }
 
-      .right-section {
-        order: 0;
-        flex-direction: column;
-      }
-      
       .dates-performance {
         order: 1;
       }
       
       .results-container {
         order: 2;
-      }
-      
-      .left-section {
-        order: 3;
+        flex-direction: column;
       }
       
       .chart-box {
+        order: 3;
+      }
+      
+      .submissions {
         order: 4;
-        width: 100%;
       }
       
       .events {
@@ -735,10 +732,14 @@
     }
 
     @media (max-width: 480px) {
+      body {
+        padding: 5px;
+      }
+
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
       }
 
       .search-profile {
@@ -747,11 +748,30 @@
       }
 
       .search-bar {
-        width: calc(100% - 55px);
+        width: calc(100% - 50px);
       }
 
-      .chart-visual {
-        height: 100px;
+      .content {
+        padding: 12px;
+      }
+
+      .menu-item {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .submission-item,
+      .result-item {
+        padding: 8px;
+      }
+
+      .performance {
+        font-size: 28px;
+      }
+
+      .add-btn {
+        height: 40px;
+        font-size: 20px;
       }
     }
   </style>
@@ -761,8 +781,11 @@
   <div class="sidebar" id="sidebar">
     <div class="logo">AI CADMEY</div>
     <div class="menu-item active"><i class="fas fa-chart-bar"></i> Dashboard</div>
+    <div class="menu-item"><i class="fas fa-user"></i> Profile</div>
     <div class="menu-item"><i class="fas fa-project-diagram"></i> Projects</div>
     <div class="menu-item"><i class="fas fa-chart-line"></i> Analytics</div>
+    <div class="menu-item"><i class="fas fa-book"></i> Resources</div>
+    <div class="menu-item"><i class="fas fa-bell"></i> Notifications</div>
     <div class="menu-item"><i class="fas fa-cog"></i> Settings</div>
   </div>
 
@@ -782,90 +805,157 @@
     </div>
 
     <div class="main-grid">
-      <div class="left-section">
-        <div class="submissions">
-          <h2 class="section-header">My Submissions (7)</h2>
-          <div class="submission-container">
-            <div class="submission-content">
-              <div class="submission-items">
-                <div class="submission-item active">
-                  <div class="thumbnail">BR</div>
-                  <div class="submission-item-content">
-                    <b>Brain Replication under consciousness</b>
-                    <p>Neural patterns research</p>
-                  </div>
+      <div class="dates-performance">
+        <div class="performance">92.6</div>
+        <div class="performance-label">Performance Score</div>
+        <div class="add-btn" id="addBtn"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <div class="results-container">
+        <div class="results">
+          <h2 class="section-header">Results (7)</h2>
+          <div class="result-item">
+            <div class="result-content">
+              <b>Brain Replication</b>
+              <p>9 Apr - Admin response</p>
+            </div>
+            <div class="score positive">+3.1</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>AI Consciousness</b>
+              <p>2 Apr - Admin response</p>
+            </div>
+            <div class="score negative">-2.5</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>Neural Network</b>
+              <p>25 Mar - Admin response</p>
+            </div>
+            <div class="score positive">+3.1</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>Quantum Computing</b>
+              <p>18 Mar - Admin response</p>
+            </div>
+            <div class="score positive">+4.2</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>ML Optimization</b>
+              <p>11 Mar - Admin response</p>
+            </div>
+            <div class="score negative">-1.8</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>NLP Models</b>
+              <p>4 Mar - Admin response</p>
+            </div>
+            <div class="score positive">+2.9</div>
+          </div>
+          <div class="result-item">
+            <div class="result-content">
+              <b>CV Framework</b>
+              <p>28 Feb - Admin response</p>
+            </div>
+            <div class="score positive">+3.7</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-placeholder">
+          <h3>Performance Trend</h3>
+          <div class="chart-visual"></div>
+          <p>Last 30 days performance</p>
+        </div>
+      </div>
+
+      <div class="submissions">
+        <h2 class="section-header">My Submissions (7)</h2>
+        <div class="submission-container">
+          <div class="submission-content">
+            <div class="submission-items">
+              <div class="submission-item active">
+                <div class="thumbnail">BR</div>
+                <div class="submission-item-content">
+                  <b>Brain Replication under consciousness</b>
+                  <p>Neural patterns research</p>
                 </div>
                 <div class="date-item">
                   <span class="day">9</span>
                   <span class="month">APR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">AI</div>
-                  <div class="submission-item-content">
-                    <b>AI Consciousness Thresholds</b>
-                    <p>Consciousness markers study</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">AI</div>
+                <div class="submission-item-content">
+                  <b>AI Consciousness Thresholds</b>
+                  <p>Consciousness markers study</p>
                 </div>
                 <div class="date-item">
                   <span class="day">2</span>
                   <span class="month">APR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">NN</div>
-                  <div class="submission-item-content">
-                    <b>Neural Network Mimicry</b>
-                    <p>Biological structures replication</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">NN</div>
+                <div class="submission-item-content">
+                  <b>Neural Network Mimicry</b>
+                  <p>Biological structures replication</p>
                 </div>
                 <div class="date-item">
                   <span class="day">25</span>
                   <span class="month">MAR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">QC</div>
-                  <div class="submission-item-content">
-                    <b>Quantum Computing Algorithms</b>
-                    <p>Quantum processors research</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">QC</div>
+                <div class="submission-item-content">
+                  <b>Quantum Computing Algorithms</b>
+                  <p>Quantum processors research</p>
                 </div>
                 <div class="date-item">
                   <span class="day">18</span>
                   <span class="month">MAR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">ML</div>
-                  <div class="submission-item-content">
-                    <b>Machine Learning Optimization</b>
-                    <p>Advanced ML techniques</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">ML</div>
+                <div class="submission-item-content">
+                  <b>Machine Learning Optimization</b>
+                  <p>Advanced ML techniques</p>
                 </div>
                 <div class="date-item">
                   <span class="day">11</span>
                   <span class="month">MAR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">NL</div>
-                  <div class="submission-item-content">
-                    <b>Natural Language Processing</b>
-                    <p>Multilingual understanding</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">NL</div>
+                <div class="submission-item-content">
+                  <b>Natural Language Processing</b>
+                  <p>Multilingual understanding</p>
                 </div>
                 <div class="date-item">
                   <span class="day">4</span>
                   <span class="month">MAR</span>
                 </div>
-                
-                <div class="submission-item">
-                  <div class="thumbnail">CV</div>
-                  <div class="submission-item-content">
-                    <b>Computer Vision Framework</b>
-                    <p>Object detection system</p>
-                  </div>
+              </div>
+              
+              <div class="submission-item">
+                <div class="thumbnail">CV</div>
+                <div class="submission-item-content">
+                  <b>Computer Vision Framework</b>
+                  <p>Object detection system</p>
                 </div>
                 <div class="date-item">
                   <span class="day">28</span>
@@ -875,105 +965,36 @@
             </div>
           </div>
         </div>
-
-        <div class="results-container">
-          <div class="results">
-            <h2 class="section-header">Results (7)</h2>
-            <div class="result-item">
-              <div class="result-content">
-                <b>Brain Replication</b>
-                <p>9 Apr - Admin response</p>
-              </div>
-              <div class="score positive">+3.1</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>AI Consciousness</b>
-                <p>2 Apr - Admin response</p>
-              </div>
-              <div class="score negative">-2.5</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>Neural Network</b>
-                <p>25 Mar - Admin response</p>
-              </div>
-              <div class="score positive">+3.1</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>Quantum Computing</b>
-                <p>18 Mar - Admin response</p>
-              </div>
-              <div class="score positive">+4.2</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>ML Optimization</b>
-                <p>11 Mar - Admin response</p>
-              </div>
-              <div class="score negative">-1.8</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>NLP Models</b>
-                <p>4 Mar - Admin response</p>
-              </div>
-              <div class="score positive">+2.9</div>
-            </div>
-            <div class="result-item">
-              <div class="result-content">
-                <b>CV Framework</b>
-                <p>28 Feb - Admin response</p>
-              </div>
-              <div class="score positive">+3.7</div>
-            </div>
-          </div>
-          <div class="chart-box">
-            <div class="chart-placeholder">
-              <h3>Performance Trend</h3>
-              <div class="chart-visual"></div>
-              <p>Last 30 days performance</p>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div class="right-section">
-        <div class="dates-performance">
-          <div class="performance">92.6</div>
-          <div class="performance-label">Performance Score</div>
-          <div class="add-btn" id="addBtn"><i class="fas fa-plus"></i></div>
+      <div class="events">
+        <h2 class="section-header">Upcoming Events (4)</h2>
+        <div class="event">
+          <div class="event-circle">11</div>
+          <div class="event-details">
+            <p>April - 8 PM</p>
+            <span>Idea Hunting</span>
+          </div>
         </div>
-        <div class="events">
-          <h2 class="section-header">Upcoming Events (4)</h2>
-          <div class="event">
-            <div class="event-circle">11</div>
-            <div class="event-details">
-              <p>April - 8 PM</p>
-              <span>Idea Hunting</span>
-            </div>
+        <div class="event">
+          <div class="event-circle">14</div>
+          <div class="event-details">
+            <p>April - 8 PM</p>
+            <span>Research Meeting</span>
           </div>
-          <div class="event">
-            <div class="event-circle">14</div>
-            <div class="event-details">
-              <p>April - 8 PM</p>
-              <span>Research Meeting</span>
-            </div>
+        </div>
+        <div class="event">
+          <div class="event-circle">21</div>
+          <div class="event-details">
+            <p>April - 8 PM</p>
+            <span>Research Meeting</span>
           </div>
-          <div class="event">
-            <div class="event-circle">21</div>
-            <div class="event-details">
-              <p>April - 8 PM</p>
-              <span>Research Meeting</span>
-            </div>
-          </div>
-          <div class="event">
-            <div class="event-circle">25</div>
-            <div class="event-details">
-              <p>April - 8 PM</p>
-              <span>AI Battle</span>
-            </div>
+        </div>
+        <div class="event">
+          <div class="event-circle">25</div>
+          <div class="event-details">
+            <p>April - 8 PM</p>
+            <span>AI Battle</span>
           </div>
         </div>
       </div>
