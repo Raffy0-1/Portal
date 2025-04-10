@@ -24,6 +24,7 @@
       display: flex;
       background-color: #f8fafc;
       color: #000;
+      padding: 10px; /* Added body padding */
     }
 
     /* Desktop Sidebar */
@@ -33,10 +34,10 @@
       padding: 30px 20px;
       display: flex;
       flex-direction: column;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
+      border-radius: 20px; /* All corners rounded */
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
       will-change: transform;
+      height: calc(100vh - 20px); /* Account for body padding */
     }
 
     .logo {
@@ -207,19 +208,30 @@
     .submission-content {
       display: flex;
       flex: 1;
-      overflow: hidden;
+      flex-direction: column;
+      overflow-y: auto;
     }
 
     .submission-items {
       flex: 1;
       overflow-y: auto;
       padding-right: 5px;
-      scrollbar-width: thin;
     }
 
-    .submission-dates {
-      overflow-y: auto;
-      padding-right: 5px;
+    .submission-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 5px;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      will-change: transform;
+    }
+
+    .submission-item.active {
+      background: #f1f5f9;
+      border-left: 3px solid #D6F26B;
     }
 
     .date-item {
@@ -229,11 +241,9 @@
       padding: 6px 10px;
       border-radius: 8px;
       font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 10px;
-      min-width: 60px;
+      margin-left: 48px;
+      margin-bottom: 15px;
+      width: fit-content;
     }
 
     .date-item .day {
@@ -245,27 +255,6 @@
     .date-item .month {
       font-size: 11px;
       opacity: 0.8;
-    }
-
-    .date-item.active {
-      background: #1A1A2E;
-      color: white;
-    }
-
-    .submission-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-      padding: 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      will-change: transform;
-    }
-
-    .submission-item.active {
-      background: #f1f5f9;
-      border-left: 3px solid #D6F26B;
     }
 
     .thumbnail {
@@ -318,7 +307,6 @@
       flex: 1;
       overflow-y: auto;
       padding-right: 5px;
-      scrollbar-width: thin;
     }
 
     .results .result-item {
@@ -533,10 +521,12 @@
 
     .modal-content {
       background: white;
-      padding: 25px;
+      padding: 20px;
       border-radius: 12px;
-      width: 450px;
+      width: 420px;
       max-width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
@@ -561,7 +551,7 @@
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .form-group label {
@@ -576,7 +566,7 @@
     .form-group textarea, 
     .form-group select {
       width: 100%;
-      padding: 10px;
+      padding: 8px 12px;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
       font-size: 14px;
@@ -591,7 +581,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 15px;
+      padding: 12px;
       border: 2px dashed #e2e8f0;
       border-radius: 6px;
       cursor: pointer;
@@ -619,25 +609,12 @@
       font-weight: 600;
       font-size: 14px;
       width: 100%;
+      margin-top: 10px;
     }
 
-    /* Custom scrollbars */
+    /* Hide scrollbars but keep functionality */
     ::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #D6F26B;
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #c4d95a;
+      display: none;
     }
 
     /* Mobile Responsiveness */
@@ -652,26 +629,26 @@
       
       .chart-box {
         width: 100%;
-        margin-top: 20px;
       }
     }
 
     @media (max-width: 768px) {
       body {
         position: relative;
+        padding: 0;
       }
 
       .sidebar {
         position: fixed;
         left: -250px;
-        top: 0;
-        bottom: 0;
+        top: 10px;
+        bottom: 10px;
         z-index: 1000;
         transition: left 0.3s ease;
       }
 
       .sidebar.show {
-        left: 0;
+        left: 10px;
       }
 
       .overlay {
@@ -723,9 +700,37 @@
         max-height: 200px;
       }
 
-      .modal-content {
-        width: 95%;
-        padding: 15px;
+      /* New mobile layout order */
+      .main-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .right-section {
+        order: 0;
+        flex-direction: column;
+      }
+      
+      .dates-performance {
+        order: 1;
+      }
+      
+      .results-container {
+        order: 2;
+      }
+      
+      .left-section {
+        order: 3;
+      }
+      
+      .chart-box {
+        order: 4;
+        width: 100%;
+      }
+      
+      .events {
+        order: 5;
       }
     }
 
@@ -743,30 +748,6 @@
 
       .search-bar {
         width: calc(100% - 55px);
-      }
-
-      .submission-content {
-        flex-direction: column;
-      }
-
-      .submission-dates {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 10px;
-      }
-
-      .date-item {
-        flex-direction: row;
-        align-items: center;
-        min-width: auto;
-        padding: 8px 12px;
-        margin-bottom: 0;
-      }
-
-      .date-item .day {
-        margin-right: 5px;
-        margin-bottom: 0;
       }
 
       .chart-visual {
@@ -807,80 +788,84 @@
           <div class="submission-container">
             <div class="submission-content">
               <div class="submission-items">
-                <div class="submission-item active" data-date="9">
+                <div class="submission-item active">
                   <div class="thumbnail">BR</div>
                   <div class="submission-item-content">
                     <b>Brain Replication under consciousness</b>
                     <p>Neural patterns research</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="2">
+                <div class="date-item">
+                  <span class="day">9</span>
+                  <span class="month">APR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">AI</div>
                   <div class="submission-item-content">
                     <b>AI Consciousness Thresholds</b>
                     <p>Consciousness markers study</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="25">
+                <div class="date-item">
+                  <span class="day">2</span>
+                  <span class="month">APR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">NN</div>
                   <div class="submission-item-content">
                     <b>Neural Network Mimicry</b>
                     <p>Biological structures replication</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="18">
+                <div class="date-item">
+                  <span class="day">25</span>
+                  <span class="month">MAR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">QC</div>
                   <div class="submission-item-content">
                     <b>Quantum Computing Algorithms</b>
                     <p>Quantum processors research</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="11">
+                <div class="date-item">
+                  <span class="day">18</span>
+                  <span class="month">MAR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">ML</div>
                   <div class="submission-item-content">
                     <b>Machine Learning Optimization</b>
                     <p>Advanced ML techniques</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="4">
+                <div class="date-item">
+                  <span class="day">11</span>
+                  <span class="month">MAR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">NL</div>
                   <div class="submission-item-content">
                     <b>Natural Language Processing</b>
                     <p>Multilingual understanding</p>
                   </div>
                 </div>
-                <div class="submission-item" data-date="28">
+                <div class="date-item">
+                  <span class="day">4</span>
+                  <span class="month">MAR</span>
+                </div>
+                
+                <div class="submission-item">
                   <div class="thumbnail">CV</div>
                   <div class="submission-item-content">
                     <b>Computer Vision Framework</b>
                     <p>Object detection system</p>
                   </div>
-                </div>
-              </div>
-              <div class="submission-dates">
-                <div class="date-item active">
-                  <span class="day">9</span>
-                  <span class="month">APR</span>
-                </div>
-                <div class="date-item">
-                  <span class="day">2</span>
-                  <span class="month">APR</span>
-                </div>
-                <div class="date-item">
-                  <span class="day">25</span>
-                  <span class="month">MAR</span>
-                </div>
-                <div class="date-item">
-                  <span class="day">18</span>
-                  <span class="month">MAR</span>
-                </div>
-                <div class="date-item">
-                  <span class="day">11</span>
-                  <span class="month">MAR</span>
-                </div>
-                <div class="date-item">
-                  <span class="day">4</span>
-                  <span class="month">MAR</span>
                 </div>
                 <div class="date-item">
                   <span class="day">28</span>
@@ -1109,38 +1094,12 @@
         submissionForm.reset();
       });
 
-      // Submission date filtering
-      const dateItems = document.querySelectorAll('.date-item');
-      const submissionItems = document.querySelectorAll('.submission-item');
-      
-      dateItems.forEach(item => {
-        item.addEventListener('click', function() {
-          dateItems.forEach(i => i.classList.remove('active'));
-          this.classList.add('active');
-          
-          const date = this.querySelector('.day').textContent;
-          submissionItems.forEach(sub => {
-            sub.classList.remove('active');
-            if (sub.getAttribute('data-date') === date) {
-              sub.classList.add('active');
-            }
-          });
-        });
-      });
-
       // Submission item click
+      const submissionItems = document.querySelectorAll('.submission-item');
       submissionItems.forEach(item => {
         item.addEventListener('click', function() {
           submissionItems.forEach(i => i.classList.remove('active'));
           this.classList.add('active');
-          
-          const date = this.getAttribute('data-date');
-          dateItems.forEach(d => {
-            d.classList.remove('active');
-            if (d.querySelector('.day').textContent === date) {
-              d.classList.add('active');
-            }
-          });
         });
       });
 
