@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI CADMEY - Notifications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      background-color: #f8fafc;
+      color: #000;
+      padding: 10px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #1A1A2E;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      will-change: transform;
+      height: calc(100vh - 20px);
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .menu-item {
+      background-color: #1A1A2E;
+      padding: 12px 18px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      font-size: 14px;
+      will-change: transform;
+      text-decoration: none !important;
+      border: 2px solid #1A1A2E;
+    }
+
+    .menu-item:not(.active):hover {
+      background-color: #2A2A3E;
+      transform: translateX(3px);
+      border-color: #D6F26B;
+    }
+
+    .menu-item.active {
+      background-color: #D6F26B;
+      color: #1A1A2E;
+      border: 2px solid #D6F26B;
+    }
+
+    .menu-item.active:hover {
+      background-color: #e8f0a0;
+    }
+
+    /* Main content with scrollable area */
+    .content {
+      flex: 1;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 20px);
+      overflow: hidden;
+    }
+
+    /* Scrollable content container */
+    .scrollable-content {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      background: #f8fafc;
+      z-index: 10;
+      padding: 10px 0;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #1A1A2E;
+    }
+
+    .top-bar h1 {
+      font-size: 24px;
+      color: #1A1A2E;
+    }
+
+    .search-profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .search-bar {
+      padding: 8px 15px;
+      background: #fff;
+      border-radius: 30px;
+      width: 220px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      will-change: box-shadow;
+    }
+
+    .search-bar:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-color: #D6F26B;
+    }
+
+    .search-bar i {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .search-bar input {
+      border: none;
+      background: transparent;
+      margin-left: 8px;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #1A1A2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      will-change: transform;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(214, 242, 107, 0.5);
+    }
+
+    /* Notifications Content */
+    .notifications-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .notifications-title {
+      font-size: 24px;
+      color: #1A1A2E;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #f1f5f9;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .action-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .action-btn.primary {
+      background: #1A1A2E;
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: #2A2A3E;
+    }
+
+    .notifications-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .notification-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      cursor: pointer;
+    }
+
+    .notification-item.unread {
+      border-left: 4px solid #D6F26B;
+      background: rgba(214, 242, 107, 0.1);
+    }
+
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notification-icon.alert {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .notification-icon.success {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    .notification-icon.info {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .notification-icon.warning {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .notification-content {
+      flex: 1;
+    }
+
+    .notification-title {
+      font-weight: bold;
+      color: #1A1A2E;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .notification-time {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .notification-message {
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .notification-btn {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #f1f5f9;
+      border: none;
+    }
+
+    .notification-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Hide scrollbars but keep functionality */
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      body {
+        position: relative;
+        padding: 0;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        border-radius: 0;
+        padding-top: 60px;
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .sidebar.show .menu-item {
+        padding: 12px 15px;
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+
+      .sidebar.show .logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: rgba(0,0,0,0.2);
+        border-radius: 0;
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+
+      .hamburger {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1001;
+      }
+
+      .content {
+        padding: 15px;
+        width: 100%;
+        height: 100vh;
+        padding-top: 70px;
+      }
+
+      .top-bar {
+        flex-direction: row;
+        gap: 15px;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #f8fafc;
+        padding: 15px;
+        z-index: 900;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+
+      .notifications-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .notification-actions {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 15px 15px 60px;
+      }
+
+      .search-profile {
+        width: 100%;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .notification-item {
+        flex-direction: column;
+      }
+
+      .notification-icon {
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="logo">AI CADMEY</div>
+    <a href="dashboard.html" class="menu-item"><i class="fas fa-chart-bar"></i> Dashboard</a>
+    <a href="profile.html" class="menu-item"><i class="fas fa-user"></i> Profile</a>
+    <a href="projects.html" class="menu-item"><i class="fas fa-project-diagram"></i> Projects</a>
+    <a href="analytics.html" class="menu-item"><i class="fas fa-chart-line"></i> Analytics</a>
+    <a href="resources.html" class="menu-item"><i class="fas fa-book"></i> Resources</a>
+    <a href="notifications.html" class="menu-item active"><i class="fas fa-bell"></i> Notifications</a>
+    <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> Settings</a>
+  </div>
+
+  <div class="content" id="content">
+    <div class="top-bar">
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <h1>Notifications</h1>
+      <div class="search-profile">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search notifications..." id="searchInput">
+        </div>
+        <div class="profile-pic">K</div>
+      </div>
+    </div>
+
+    <div class="scrollable-content">
+      <div class="notifications-header">
+        <h2 class="notifications-title">Recent Activity</h2>
+        <div class="notification-actions">
+          <button class="action-btn primary" id="markAllRead">
+            <i class="fas fa-check-double"></i>
+            Mark all as read
+          </button>
+          <button class="action-btn" id="clearAll">
+            <i class="fas fa-trash"></i>
+            Clear all
+          </button>
+        </div>
+      </div>
+
+      <div class="notifications-list">
+        <!-- Unread Notification -->
+        <div class="notification-item unread">
+          <div class="notification-icon alert">
+            <i class="fas fa-exclamation"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>Research Deadline Approaching</span>
+              <span class="notification-time">10 min ago</span>
+            </div>
+            <div class="notification-message">
+              Your submission for "Brain Replication under Consciousness" is due in 2 days. Please complete your final edits.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-eye"></i> View
+              </button>
+              <button class="notification-btn">
+                <i class="fas fa-times"></i> Dismiss
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Read Notification -->
+        <div class="notification-item">
+          <div class="notification-icon success">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>Project Approved</span>
+              <span class="notification-time">2 hours ago</span>
+            </div>
+            <div class="notification-message">
+              Your project "Quantum Consciousness" has been approved by the review board. Funding has been allocated.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-eye"></i> View
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Notification -->
+        <div class="notification-item">
+          <div class="notification-icon info">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>New Team Member</span>
+              <span class="notification-time">5 hours ago</span>
+            </div>
+            <div class="notification-message">
+              Dr. Sarah Chen has joined your "Neural Mimicry" project team. She brings expertise in computational neuroscience.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-eye"></i> View Profile
+              </button>
+              <button class="notification-btn">
+                <i class="fas fa-comment"></i> Message
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Notification -->
+        <div class="notification-item unread">
+          <div class="notification-icon warning">
+            <i class="fas fa-server"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>System Maintenance</span>
+              <span class="notification-time">Yesterday</span>
+            </div>
+            <div class="notification-message">
+              Scheduled maintenance this Saturday from 2:00 AM to 4:00 AM. Some services may be unavailable during this time.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-calendar"></i> Add to Calendar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Notification -->
+        <div class="notification-item">
+          <div class="notification-icon info">
+            <i class="fas fa-flask"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>New Research Published</span>
+              <span class="notification-time">2 days ago</span>
+            </div>
+            <div class="notification-message">
+              A new paper matching your interests has been published: "Advances in Artificial Consciousness Models" by Dr. Michael Rodriguez.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-book-open"></i> Read Paper
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Notification -->
+        <div class="notification-item">
+          <div class="notification-icon success">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">
+              <span>Event Reminder</span>
+              <span class="notification-time">1 week ago</span>
+            </div>
+            <div class="notification-message">
+              Don't forget about the AI Research Symposium tomorrow at 3:00 PM in the main auditorium.
+            </div>
+            <div class="notification-actions">
+              <button class="notification-btn">
+                <i class="fas fa-info-circle"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hamburger menu functionality
+      const hamburger = document.getElementById('hamburger');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleSidebar() {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.toggle('show');
+          overlay.classList.toggle('show');
+          
+          const icon = hamburger.querySelector('i');
+          if (sidebar.classList.contains('show')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        }
+      }
+      
+      hamburger.addEventListener('click', toggleSidebar);
+      overlay.addEventListener('click', toggleSidebar);
+
+      // Mark all as read functionality
+      const markAllReadBtn = document.getElementById('markAllRead');
+      markAllReadBtn.addEventListener('click', function() {
+        document.querySelectorAll('.notification-item.unread').forEach(item => {
+          item.classList.remove('unread');
+        });
+      });
+
+      // Clear all notifications
+      const clearAllBtn = document.getElementById('clearAll');
+      clearAllBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear all notifications?')) {
+          document.querySelector('.notifications-list').innerHTML = '<p class="empty-message">No notifications to display</p>';
+        }
+      });
+
+      // Dismiss individual notifications
+      document.querySelectorAll('.notification-btn .fa-times').forEach(btn => {
+        btn.closest('.notification-btn').addEventListener('click', function(e) {
+          e.stopPropagation();
+          this.closest('.notification-item').remove();
+        });
+      });
+
+      // Hide hamburger on desktop
+      function handleResize() {
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove('show');
+          overlay.classList.remove('show');
+          const icon = hamburger.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      }
+
+      window.addEventListener('resize', handleResize);
+      handleResize(); // Initialize
+    });
+  </script>
+</body>
+</html>

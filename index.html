@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Researcher Portal Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: #f8fafc;
+      overflow: hidden;
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .login-header {
+      background-color: #1A1A2E;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .login-header h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .login-header p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .login-body {
+      padding: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1A1A2E;
+      font-size: 14px;
+    }
+
+    .input-field {
+      position: relative;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .input-field input:focus {
+      outline: none;
+      border-color: #D6F26B;
+      box-shadow: 0 0 0 3px rgba(214, 242, 107, 0.2);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+    }
+
+    .remember-me input {
+      margin-right: 8px;
+    }
+
+    .forgot-password a {
+      color: #1A1A2E;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1A1A2E;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #2A2A3E;
+      transform: translateY(-2px);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 13px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .input-field.error input {
+      border-color: #ef4444;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .login-header {
+        padding: 25px 20px;
+      }
+      
+      .login-body {
+        padding: 25px 20px;
+      }
+      
+      .remember-forgot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Researcher Portal</h1>
+        <p>Access your research dashboard and submissions</p>
+      </div>
+      
+      <div class="login-body">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="registrationNumber">Registration Number</label>
+            <div class="input-field">
+              <i class="fas fa-id-card input-icon"></i>
+              <input type="text" id="registrationNumber" placeholder="Enter your registration number" required>
+            </div>
+            <div class="error-message" id="regNumberError">Please enter a valid registration number</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-field">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+          </div>
+          
+          <div class="remember-forgot">
+            <div class="remember-me">
+              <input type="checkbox" id="rememberMe">
+              <label for="rememberMe">Remember me</label>
+            </div>
+            <div class="forgot-password">
+              <a href="#">Forgot password?</a>
+            </div>
+          </div>
+          
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Temporary credentials
+      const TEMP_REG_NO = 'KAIC25XYZ';
+      const TEMP_PASSWORD = 'AIC123';
+      
+      const loginForm = document.getElementById('loginForm');
+      const regNumberInput = document.getElementById('registrationNumber');
+      const passwordInput = document.getElementById('password');
+      const regNumberError = document.getElementById('regNumberError');
+      const passwordError = document.getElementById('passwordError');
+      
+      // Check if user is already logged in (from sessionStorage)
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        window.location.href = 'dashboard.html';
+      }
+      
+      // Form validation
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let isValid = true;
+        
+        // Reset error states
+        regNumberInput.parentElement.classList.remove('error');
+        regNumberError.style.display = 'none';
+        passwordInput.parentElement.classList.remove('error');
+        passwordError.style.display = 'none';
+        
+        // Get input values
+        const regNumber = regNumberInput.value.trim();
+        const password = passwordInput.value;
+        
+        // Validate registration number
+        if (regNumber.length === 0) {
+          regNumberInput.parentElement.classList.add('error');
+          regNumberError.textContent = 'Registration number is required';
+          regNumberError.style.display = 'block';
+          isValid = false;
+        }
+        
+        // Validate password
+        if (password.length === 0) {
+          passwordInput.parentElement.classList.add('error');
+          passwordError.textContent = 'Password is required';
+          passwordError.style.display = 'block';
+          isValid = false;
+        }
+        
+        if (isValid) {
+          // Check credentials against temporary values
+          if (regNumber === TEMP_REG_NO && password === TEMP_PASSWORD) {
+            // Show loading state
+            const loginBtn = loginForm.querySelector('.login-btn');
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            loginBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(function() {
+              // Store login state in sessionStorage
+              sessionStorage.setItem('isLoggedIn', 'true');
+              
+              // Redirect to dashboard
+              window.location.href = 'dashboard.html';
+            }, 1000);
+          } else {
+            // Show error for incorrect credentials
+            regNumberInput.parentElement.classList.add('error');
+            passwordInput.parentElement.classList.add('error');
+            passwordError.textContent = 'Invalid registration number or password';
+            passwordError.style.display = 'block';
+          }
+        }
+      });
+      
+      // Forgot password link
+      const forgotPassword = document.querySelector('.forgot-password a');
+      forgotPassword.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Please contact the administrator to reset your password');
+      });
+    });
+  </script>
+</body>
+</html>
